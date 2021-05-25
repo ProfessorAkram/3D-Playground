@@ -1,7 +1,7 @@
 ﻿/*****
  * Author: Akram Taghavi-Burris
  * Date Created: May 24, 2021
- * Last Updated: May 24, 2021
+ * Last Updated: May 25, 2021
  * Description: Move game object with controls
  * Project: 3D Playground - a drag and drop framework for 3d game development derived from Unity's own 2D Playground framework.
  ****/
@@ -46,6 +46,11 @@ public class Jump : MonoBehaviour
 
 	private bool canJump = true;
 
+    [Header("Debug")]
+    //Debug code
+    [Tooltip("When checked will output values to console")]
+    public bool debugCode = false;
+
     //Awake loads before scene start
     private void Awake()
     {
@@ -79,15 +84,22 @@ public class Jump : MonoBehaviour
     }//ednd OnEnable()
 
 
-    // FixedUpdate is called once per frame
-    void FixedUpdate()
+    // Update is called every frame
+    void Update()
     {
         if (canJump && input.PlayerActions.Jump.triggered)
         {
+            //add jump force
             go_Rigidbody.AddForce(transform.up * jumpStrength, ForceMode.VelocityChange);
+            
+            //no longer on ground
             canJump = !checkGround;
+
+            //if debugCode is true
+            if (debugCode) { DebugCode(); }
         }
-    }//end FixedUpdate()
+
+    }//end Update()
 
     //When player enters a collision
     private void OnCollisionEnter(Collision collisionData)
@@ -99,4 +111,11 @@ public class Jump : MonoBehaviour
         }//end if
     }//end OnCollisionEnter(Collision collisionData)
 
+
+    //outputs values to log for debugging.
+    void DebugCode()
+    {
+        //output the transform position
+            Debug.Log(gameObject.name + " Jump");
+    }//end DebugCode()
 }

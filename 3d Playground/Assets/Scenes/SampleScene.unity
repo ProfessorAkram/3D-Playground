@@ -134,7 +134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1283017171755564, guid: f10c394033f254647873f3d28a75a062, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4058866896921748, guid: f10c394033f254647873f3d28a75a062, type: 3}
       propertyPath: m_RootOrder
@@ -195,15 +195,15 @@ GameObject:
   - component: {fileID: 564102943}
   - component: {fileID: 564102942}
   - component: {fileID: 564102941}
-  - component: {fileID: 564102940}
   - component: {fileID: 564102946}
+  - component: {fileID: 564102940}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &564102940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,8 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4be08ffe70cea434d9e684fd6279893d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedX: 5
-  moveSpeedY: 5
+  moveSpeed: 5
+  debugCode: 0
 --- !u!54 &564102941
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -321,9 +321,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c5d1a2a76bcac468325afd470ece06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpStrength: 50
+  jumpStrength: 5
   groundTag: Ground
   checkGround: 1
+  debugCode: 0
 --- !u!1 &578124690
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +338,6 @@ GameObject:
   - component: {fileID: 578124694}
   - component: {fileID: 578124693}
   - component: {fileID: 578124692}
-  - component: {fileID: 578124691}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -345,21 +345,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &578124691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 578124690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9c5d1a2a76bcac468325afd470ece06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpStrength: 5
-  groundTag: Ground
-  checkGround: 1
 --- !u!54 &578124692
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -643,8 +628,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4be08ffe70cea434d9e684fd6279893d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedX: 5
-  moveSpeedY: 5
+  moveSpeed: 5
+  debugCode: 0
 --- !u!114 &1320341835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,6 +645,7 @@ MonoBehaviour:
   jumpStrength: 5
   groundTag: Ground
   checkGround: 1
+  debugCode: 0
 --- !u!54 &1320341836
 Rigidbody:
   m_ObjectHideFlags: 0

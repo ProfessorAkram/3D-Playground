@@ -1,7 +1,7 @@
 ﻿/*****
  * Author: Akram Taghavi-Burris
  * Date Created: May 24, 2021
- * Last Updated: May 24, 2021
+ * Last Updated: May 25, 2021
  * Description: Auto moves game object
  * Project: 3D Playground - a drag and drop framework for 3d game development derived from Unity's own 2D Playground framework.
  ****/
@@ -16,34 +16,67 @@ using UnityEngine;
 
 public class AutoMove : MonoBehaviour
 {
-    // These are the forces that will push the object every frame
-    // don't forget they can be negative too!
-    public Vector3 direction = new Vector3(1f, 0f, 0f);
+	[Header("[TIP: if the object doesn't move, try a larger number for the direction]")]
+	[Header("Movement")]
+	[Header("[The GameObject moves automatically in a specific direction]")]
 
-    //is the push relative or absolute to the world?
+	// These are the forces that will push the object every frame
+	// don't forget they can be negative too!
+	[Tooltip("The amount of force in a direction." )]
+	public Vector3 direction = new Vector3(1f, 0f, 0f);
+
+	//is the push relative or absolute to the world?
     public bool relativeToRotation = true;
 
-	//reference to the rigidbody component
-	Rigidbody go_Rigidbody; 
+	[Header("Debug")]
+	//Debug code
+	[Tooltip("When checked will output values to console")]
+	public bool debugCode = false; 
 
-	//on scene start
-	void Start()
+	//reference to the rigidbody component
+	Rigidbody go_Rigidbody;
+
+	//Awake loads before scene start
+	private void Awake()
 	{
 		//Fetch the Rigidbody from the GameObject with this script attached
 		go_Rigidbody = GetComponent<Rigidbody>();
-	}//end Start()
+
+		//Freeze all rotation
+		go_Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+	}//end Awake()
+
 
 	// FixedUpdate is called once per frame
 	void FixedUpdate()
 	{
 		if (relativeToRotation)
 		{
-			go_Rigidbody.AddRelativeForce(direction * 2f);
+			//add relative force * 2
+			go_Rigidbody.AddRelativeForce(direction * 2f); 
 
 		}
 		else
 		{
+			//add force *2 
 			go_Rigidbody.AddForce(direction * 2f);
 		}//end if (relativeToRotation)
+
 	}//end FixedUpdate()
+
+	// Update is called every frame
+	private void Update()
+    {
+		//if debugCode is true
+		if (debugCode) { DebugCode(); }
+
+    }//end Update() 
+
+	//outputs values to log for debugging.
+    void DebugCode()
+    {
+		//output the transform position
+		Debug.Log(gameObject.name + " AutoMove Transform: " + transform.localPosition);
+	}//end DebugCode()
+
 }

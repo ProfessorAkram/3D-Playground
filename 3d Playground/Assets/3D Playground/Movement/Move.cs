@@ -1,7 +1,7 @@
 ﻿/*****
  * Author: Akram Taghavi-Burris
  * Date Created: May 24, 2021
- * Last Updated: May 24, 2021
+ * Last Updated: May 25, 2021
  * Description: Move game object with controls
  * Project: 3D Playground - a drag and drop framework for 3d game development derived from Unity's own 2D Playground framework.
  ****/
@@ -26,21 +26,23 @@ public class Move : MonoBehaviour
     Rigidbody go_Rigidbody;
 
     //current movement
-    Vector2 move;
+    Vector2 move; //vector 2 because we only need two values to be used in the vector3
     
     //check for movement
     bool movementPressed;
 
     [Header("Movement")]
-    [Space(5)]  
+    [Space(5)]
     [Header("[The GameObject moves when input is triggered]")]
-   
-    //variable for the speed of movement
-    [Tooltip("the speed in the horizontal direction (left and right)")]
-    public float moveSpeedX;
 
-    [Tooltip("the speed in the vertical direction (backwards and forwards)")]
-    public float moveSpeedY; 
+    //variable for the speed of movement
+    [Tooltip("how fast the object moves")]
+    public float moveSpeed;
+
+    [Header("Debug")]
+	//Debug code
+	[Tooltip("When checked will output values to console")]
+	public bool debugCode = false; 
 
     //Awake loads before scene start
     private void Awake()
@@ -59,7 +61,10 @@ public class Move : MonoBehaviour
         {
           //  Debug.Log(ctx.ReadValueAsObject()); //Debug Check to see what the input is reading
             move = ctx.ReadValue<Vector2>(); //get the vector of movement
-            movementPressed = move.x != 0 || move.y != 0; //set movmementPressed if we are not at zero
+            //set movmementPressed if we are not at zero
+            movementPressed = move.x != 0 || move.y != 0;
+            //if debugCode is true
+            if (debugCode) { DebugCode(); }
         };
 
         //When movement is cancled (zero) the movment
@@ -87,11 +92,28 @@ public class Move : MonoBehaviour
     }//ednd OnEnable()
 
 
-    // FixedUpdate is called once per frame
-    void FixedUpdate()
+    // Update is called every frame
+    void Update()
     {
-        Vector3 go_Move = new Vector3(move.x * moveSpeedX, 0, move.y * moveSpeedY);
-        go_Rigidbody.velocity = go_Move; 
-    }//end FixedUpdate()
+        //Get the velocity for Y
+        float velocityY = go_Rigidbody.velocity.y;
+
+        //set vector3 for new velocity 
+        Vector3 go_Move = new Vector3(move.x * moveSpeed, velocityY, move.y * moveSpeed);
+        
+        //apply speed to velocity
+        go_Rigidbody.velocity = go_Move;
+
+    }//end Update()
+
+
+    //outputs values to log for debugging.
+    void DebugCode()
+    {
+        //output the transform position
+        Debug.Log(gameObject.name + " Move Transform: " + transform.localPosition);
+    }//end DebugCode()
+
+
 
 }
