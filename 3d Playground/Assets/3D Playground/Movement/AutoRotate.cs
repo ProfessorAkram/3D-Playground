@@ -14,7 +14,7 @@ using UnityEngine;
 [AddComponentMenu("3D Playground/Movement/Auto Rotate")]
 [RequireComponent(typeof(Rigidbody))]
 
-public class AutoRotate : MonoBehaviour
+public class AutoRotate : PhysicsObject
 {
 	[Header("[TIP: if the object rotates too slowly, try a larger amount]")]
 	[Header("Auto Rotate")]
@@ -31,19 +31,7 @@ public class AutoRotate : MonoBehaviour
 	//angular velocity of the game object
 	Vector3 m_EulerAngleVelocity;
 
-	//reference to the rigidbody component
-	Rigidbody go_Rigidbody;
 
-
-	//Awake loads before scene start
-	private void Awake()
-	{
-		//Fetch the Rigidbody from the GameObject with this script attached
-		go_Rigidbody = GetComponent<Rigidbody>();
-
-		//Freeze all rotation
-		go_Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-	}//end Awake()
 
 	//when the scene starts
     private void Start()

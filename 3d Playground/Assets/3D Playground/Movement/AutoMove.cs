@@ -14,7 +14,7 @@ using UnityEngine;
 [AddComponentMenu("3D Playground/Movement/Auto Move")]
 [RequireComponent(typeof(Rigidbody))]
 
-public class AutoMove : MonoBehaviour
+public class AutoMove : PhysicsObject
 {
 	[Header("[TIP: if the object doesn't move, try a larger number for the direction]")]
 	[Header("Movement")]
@@ -32,19 +32,6 @@ public class AutoMove : MonoBehaviour
 	//Debug code
 	[Tooltip("When checked will output values to console")]
 	public bool debugCode = false; 
-
-	//reference to the rigidbody component
-	Rigidbody go_Rigidbody;
-
-	//Awake loads before scene start
-	private void Awake()
-	{
-		//Fetch the Rigidbody from the GameObject with this script attached
-		go_Rigidbody = GetComponent<Rigidbody>();
-
-		//Freeze all rotation
-		go_Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-	}//end Awake()
 
 
 	// FixedUpdate is called once per frame

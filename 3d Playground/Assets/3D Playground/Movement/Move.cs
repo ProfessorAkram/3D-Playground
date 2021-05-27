@@ -16,14 +16,12 @@ using UnityEditor;
 [AddComponentMenu("3D Playground/Movement/Move")]
 [RequireComponent(typeof(Rigidbody))]
 
-public class Move : MonoBehaviour
+public class Move : PhysicsObject
 {
 
     //Instance of PlayerInput (script)
     PlayerInput input;
 
-    //reference to the rigidbody component
-    Rigidbody go_Rigidbody;
 
     //current movement
     Vector2 move; //vector 2 because we only need two values to be used in the vector3
@@ -42,16 +40,13 @@ public class Move : MonoBehaviour
     [Header("Debug")]
 	//Debug code
 	[Tooltip("When checked will output values to console")]
-	public bool debugCode = false; 
+	public bool debugCode = false;
 
     //Awake loads before scene start
-    private void Awake()
+    protected override void Awake()
     {
-		//Fetch the Rigidbody from the GameObject with this script attached
-		go_Rigidbody = GetComponent<Rigidbody>();
-
-        //Freeze all rotation
-        go_Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+        //loades the awake from the base class
+        base.Awake();
 
         //create new instace of playerInput 
         input = new PlayerInput();
@@ -63,6 +58,7 @@ public class Move : MonoBehaviour
             move = ctx.ReadValue<Vector2>(); //get the vector of movement
             //set movmementPressed if we are not at zero
             movementPressed = move.x != 0 || move.y != 0;
+          
             //if debugCode is true
             if (debugCode) { DebugCode(); }
         };

@@ -16,14 +16,11 @@ using UnityEditor;
 [AddComponentMenu("3D Playground/Movement/Jump")]
 [RequireComponent(typeof(Rigidbody))]
 
-public class Jump : MonoBehaviour
+public class Jump : PhysicsObject
 {
 
     //Instance of PlayerInput (script)
     PlayerInput input;
-
-    //reference to the rigidbody component
-    Rigidbody go_Rigidbody;
 
     [Header("Jump Setup")]
     [Space(5)]
@@ -52,13 +49,10 @@ public class Jump : MonoBehaviour
     public bool debugCode = false;
 
     //Awake loads before scene start
-    private void Awake()
+    protected override void Awake()
     {
-        //Fetch the Rigidbody from the GameObject with this script attached
-        go_Rigidbody = GetComponent<Rigidbody>();
-
-        //set Drag on the game object. Drag are between .001 (solid block of metal) and 10 (feather).
-        //go_Rigidbody.drag= 0.001f;
+        //loades the awake from the base class
+        base.Awake();
 
         //create new instace of playerInput 
         input = new PlayerInput();
