@@ -22,6 +22,7 @@ public class Jump : PhysicsObject
     //Instance of PlayerInput (script)
     PlayerInput input;
 
+
     [Header("Jump Setup")]
     [Space(5)]
     [Header("[The GameObject jumps on button (space bar) press]")]

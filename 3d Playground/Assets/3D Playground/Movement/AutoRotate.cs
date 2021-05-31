@@ -1,7 +1,7 @@
 ﻿/*****
  * Author: Akram Taghavi-Burris
  * Date Created: May 25, 2021
- * Last Updated: May 25, 2021
+ * Last Updated: May 31, 2021
  * Description: Auto rotates game object
  * Project: 3D Playground - a drag and drop framework for 3d game development derived from Unity's own 2D Playground framework.
  ****/
@@ -16,44 +16,61 @@ using UnityEngine;
 
 public class AutoRotate : PhysicsObject
 {
-	[Header("[TIP: if the object rotates too slowly, try a larger amount]")]
+	
 	[Header("Auto Rotate")]
-	[Header("[The GameObject rotates along the Y axis, at a given speed]")]
 
+	//rotation is along the x,y, or z axis
+	[Tooltip("Which direction to rotate object: x , y, z")]
+	//rotation Directions
+	public string rotationDirection;
+
+	[Header("[TIP: if the object rotates too slowly, try a larger amount]")]
+	[Tooltip("How fast the object rotates when clicked")]
 	// This is the force that rotate the object every frame
-	public float rotationSpeed = 5;
+	public float rotationSpeed = 2.5f;
+
+	Vector3 myRotation;
 
 	[Header("Debug")]
 	//Debug code
 	[Tooltip("When checked will output values to console")]
 	public bool debugCode = false;
 
-	//angular velocity of the game object
-	Vector3 m_EulerAngleVelocity;
-
-
 
 	//when the scene starts
-    private void Start()
+	private void Start()
     {
-		m_EulerAngleVelocity = new Vector3(0, rotationSpeed, 0);
+		//Set rotation
+		switch (rotationDirection)
+		{
+			case "x":
+				myRotation = Vector3.left;
+				break;
+			case "y":
+				myRotation = Vector3.up;
+				break;
+			case "z":
+				myRotation = Vector3.forward;
+				break;
+			default:
+				myRotation = Vector3.forward;
+				break;
+		}//end switch
 	}
 
-    // FixedUpdate is called once per frame
-    void FixedUpdate()
-	{
-		Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
-		go_Rigidbody.MoveRotation(go_Rigidbody.rotation * deltaRotation);
-
-	}//end FixedUpdate()
 
 	// Update is called every frame
 	private void Update()
 	{
+		//rotate object
+		transform.Rotate(myRotation, rotationSpeed);
+
 		//if debugCode is true
 		if (debugCode) { DebugCode(); }
 
-	}//end Update() 
+	}//end Update()
+	
+
 
 	//outputs values to log for debugging.
 	void DebugCode()
