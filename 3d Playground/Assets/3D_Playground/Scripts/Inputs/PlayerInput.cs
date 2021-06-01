@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/3D Playground/Inputs/PlayerInput.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/3D_Playground/Scripts/Inputs/PlayerInput.inputactions'
 
 using System;
 using System.Collections;

@@ -37,7 +37,7 @@ public class AutoRotate : PhysicsObject
 	public bool debugCode = false;
 
 
-	//when the scene starts
+	// Start is called before the first frame update
 	private void Start()
     {
 		//Set rotation

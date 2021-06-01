@@ -68,4 +68,6 @@ public abstract class ConditionBase : MonoBehaviour
 
 		alreadyHappened = true; //will prevent re-executing the actions if happenOnlyOnce is true
 	}
+
+
 }

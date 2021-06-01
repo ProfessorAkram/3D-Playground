@@ -68,11 +68,14 @@ public class Rotate : PhysicsObject
 
 	}//end Awake()
 
-		//when the scene starts
-		private void Start()
+	// Start is called before the first frame update
+	private void Start()
 	{
 		//get the ClickCheck of the main camera
 		clicked = mainCamera.GetComponent<ClickCheck>();
+
+		//set string to lowercase
+		rotationDirection.ToLower();
 
 		//Set rotation
 		switch (rotationDirection)

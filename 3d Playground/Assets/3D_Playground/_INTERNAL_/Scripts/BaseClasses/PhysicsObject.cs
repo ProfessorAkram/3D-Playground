@@ -19,6 +19,7 @@ public abstract class PhysicsObject : MonoBehaviour
     //reference to the rigidbody component
     public Rigidbody go_Rigidbody;
 
+    //Awake loads before scene start
     protected virtual void Awake()
     {
         //Fetch the Rigidbody from the GameObject with this script attached
