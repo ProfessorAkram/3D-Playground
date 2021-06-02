@@ -20,10 +20,14 @@ public class ConditionCollision : ConditionBase
 	//refence to object's collider
 	Collider objCollider;
 
+
 	[Header("IF NO COLLIDER IS SET, A DEFULAT BOX COLLIDER IS ADDED")]
 	[Header("THIS CONDITION REQUIRES YOU TO SET THE OBJECT COLLIDER")]
 	[Space(10)] //space between compenent sections
 	public bool didYouSetCollider = false;
+
+	[Header("Destory object on Collsion")]
+	public bool destroyOnCollision = true;
 
 	[Header("Debug")]
 	//Debug code
@@ -48,16 +52,31 @@ public class ConditionCollision : ConditionBase
 	void OnCollisionEnter(Collision collision)
 	{
 		hitObj = collision.gameObject.name; //set the object hit
+		Debug.Log("trigger: " + this.GetComponent<Collider>().isTrigger);
 
-		//check the tag of the hit object
-		if (collision.collider.CompareTag(filterTag)
-			|| !filterByTag)
-		{
-			ExecuteAllActions(collision.gameObject); //run actions
+			//check the tag of the hit object or if we are not filtering by tags
+			if (collision.collider.CompareTag(filterTag)
+				|| !filterByTag)
+			{
+				ExecuteAllActions(collision.gameObject); //run actions
+	
+				
+				//if delete on Collison
+				if (destroyOnCollision) { 
+					this.gameObject.GetComponent<MeshRenderer>().enabled=false; 
+				}
+
 		}
 
 		if (debugCode) { Debug.Log(hitObj); } //debug the collider object
 	}
+
+	// Reset Action on exit
+	void OnCollisionExit(Collision collision)
+	{
+
+	}
+
 
 
 	//Debug the collider at first updated

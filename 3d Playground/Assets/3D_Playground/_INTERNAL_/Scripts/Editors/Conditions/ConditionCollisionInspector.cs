@@ -33,6 +33,8 @@ public class ConditionCollisionInspector : ConditionInspectorBase
 
 		GUILayout.Space(10);
 		DrawActionLists();
+		//ADDED: include delete property in inspector
+		EditorGUILayout.PropertyField(serializedObject.FindProperty("destroyOnCollision"));
 
 		//ADDED: include debug property in inspector
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("debugCode"));

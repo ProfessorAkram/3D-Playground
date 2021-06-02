@@ -496,10 +496,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7fdd0b24ff832a4489233fc5464fb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueCanvas: {fileID: 4927853506794035783}
   panel: {fileID: 4927853506647833413}
   dialogueTextBox: {fileID: 4927853507520103047}
   button: {fileID: 448154440559686838}
-  buttonText: {fileID: 0}
   fadeIn: 1
   fadeDuration: 1.5
 --- !u!1 &4927853507520103045

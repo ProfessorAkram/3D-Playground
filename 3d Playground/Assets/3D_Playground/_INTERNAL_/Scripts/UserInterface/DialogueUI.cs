@@ -1,7 +1,7 @@
 ﻿/*****
  * Author: Akram Taghavi-Burris
  * Date Created: June 1, 2021
- * Last Updated: June 2, 2021
+ * Last Updated: June 1, 2021
  * Description: Sets up the fade in and out for the dialogue group
  * Project: 3D Playground - a drag and drop framework for 3d game development derived from Unity's own 2D Playground framework.
  ****/
@@ -15,7 +15,8 @@ using TMPro;
 
 public class DialogueUI : MonoBehaviour
 {
-    CanvasGroup dialgueGroup;
+    CanvasGroup dialogueGroup;
+    public GameObject dialogueCanvas;
     public RectTransform panel;
     public TMP_Text dialogueTextBox;
     public Button button;
@@ -35,39 +36,41 @@ public class DialogueUI : MonoBehaviour
 
     private void Awake()
     {
-        dialgueGroup = GetComponent<CanvasGroup>();
-        dialgueGroup.alpha = transparent;
+        dialogueGroup = GetComponent<CanvasGroup>();
+        dialogueGroup.alpha = transparent;
     }
 
     private void Start()
     {
         StartCoroutine(FadeDialogue());
-        Debug.Log(dialgueGroup);
+        Debug.Log(dialogueGroup);
 
     }
 
-    private void CloseDialogue()
+    public void CloseDialogue()
     {
-        StartCoroutine(FadeDialogue());
-        Destroy(this);
+        Debug.Log("CloseDialouge");
+        StartCoroutine("FadeDialogue");
+
     }
 
     // Dialogue box fades in and out
   IEnumerator FadeDialogue()
      {// fade from opaque to transparent
-        Debug.Log("start fade");
 
         timeElapsed = 0;
 
         //if sets the fade in or out
         if (fadeIn)
         { //time to fade in
+            Debug.Log("Fade In= " + fadeIn);
             startValue = transparent;
             endValue = opaque;
             fadeIn = false;
         }
         else
         {
+            Debug.Log("Fade In= " + fadeIn);
             startValue = opaque;
             endValue = transparent;
             fadeIn = true;
@@ -76,13 +79,17 @@ public class DialogueUI : MonoBehaviour
         //While loop runs the animation over time
             while (timeElapsed < fadeDuration)
             {
-                dialgueGroup.alpha = Mathf.Lerp(startValue, endValue, timeElapsed / fadeDuration);
+                dialogueGroup.alpha = Mathf.Lerp(startValue, endValue, timeElapsed / fadeDuration);
                 timeElapsed += Time.deltaTime;
             yield return null;
         }
 
-            dialgueGroup.alpha = endValue;
+            dialogueGroup.alpha = endValue;
             yield return null;
+
         }//end FadeDialogue()
-       
+
+
+
+
 }
