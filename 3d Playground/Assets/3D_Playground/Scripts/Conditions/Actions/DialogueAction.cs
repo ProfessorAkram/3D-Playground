@@ -18,8 +18,8 @@ public class DialogueAction : Action
     //check if dialogue is closed
     bool dialogueClosed;
 
-	//reference to dialogue group
-	GameObject goDialogue;
+    //reference to dialogue group
+    GameObject goDialogue;
 
     //the canvas for the UI Interaction
     GameObject ui_canvas;
@@ -35,34 +35,34 @@ public class DialogueAction : Action
     public GameObject dialogueUI;
     RectTransform panel;
     TMP_Text textBox;
-	Button btn;
+    Button btn;
     TMP_Text btnTXT;
 
     [Header("Dialogue Text")]
     public string dialogueText;
 
 
-	//ExecuteAction runs the action and must return a true or false.
-	public override bool ExecuteAction(GameObject other)
+    //ExecuteAction runs the action and must return a true or false.
+    public override bool ExecuteAction(GameObject other)
     {
-            //create instance of dialogue group
-            goDialogue = Instantiate(dialogueUI);
+        //create instance of dialogue group
+        goDialogue = Instantiate(dialogueUI);
         Debug.Log(goDialogue);
 
-            //set the dialogue
-            setDialogue();
-            setUiInteraction();
-            setButton();
+        //set the dialogue
+        setDialogue();
+        setUiInteraction();
+        setButton();
 
         return true;
     }
 
 
     // Update is called every frame
-	void Update()
-	{
+    void Update()
+    {
         //if goDialogue exsists
-       	if(!dialogueClosed)
+        if (!dialogueClosed)
         {
             if (uiInterantion.ui_element.name == btn.name)
             {
@@ -74,19 +74,19 @@ public class DialogueAction : Action
 
         }
 
-        if(goDialogue && dialogueClosed)
+        if (goDialogue && dialogueClosed)
         {
-            Destroy(goDialogue,5);
+            Destroy(goDialogue, 5);
             if (this.gameObject.GetComponent<ConditionCollision>().destroyOnCollision)
             {
                 Destroy(this.gameObject, 5);
             }
         }
 
-	}//end Update() 
+    }//end Update() 
 
 
-	//set the dialogue text to display [UPDATE IN FUTURE TO ACCEPT ARRAYS]
+    //set the dialogue text to display [UPDATE IN FUTURE TO ACCEPT ARRAYS]
     void setDialogue()
     {
         //Get the text box of game object Dialogue
@@ -119,12 +119,12 @@ public class DialogueAction : Action
     }
 
     //sets the button text for the dialogue [UPDATE IN FUTURE TO CHANGE BASED ON AMOUNT OF DIALOGUE]
-	void setButton()
+    void setButton()
     {
-		btn = goDialogue.GetComponent<DialogueUI>().button;
+        btn = goDialogue.GetComponent<DialogueUI>().button;
         btnTXT = btn.GetComponentInChildren<TMP_Text>();
         btnTXT.text = "x";
-	}
+    }
 
 
 

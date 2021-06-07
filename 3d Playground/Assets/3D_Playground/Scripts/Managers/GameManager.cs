@@ -60,7 +60,7 @@ public class GameManager: MonoBehaviour
 
     public static int score;  //score value
     public static int lives; // number of lives for player
-    //access to private variable died [get/set methods]
+    //access to private variable Lives [get/set methods]
     public int Lives { get { return lives; } set { lives = value; } }
 
     public string looseMessage = "You Loose"; //Message if player looses

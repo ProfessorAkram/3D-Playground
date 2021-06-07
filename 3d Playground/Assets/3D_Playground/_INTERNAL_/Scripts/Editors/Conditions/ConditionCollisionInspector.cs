@@ -1,12 +1,14 @@
 ﻿/*****
  * Author: Akram Taghavi-Burris
  * Date Created: NA - Copied from Playground 
- * Last Updated: May 31, 2021 - Addtions only
+ * Last Updated: June 06, 2021 - Additions only
  * Description: Custom Editor for the Condition Collison Inspector
  * Project: 3D Playground - a drag and drop framework for 3d game development derived from Unity's own 2D Playground framework.
  ****/
 
+//USE #IF UNITY_EDITOR TO IGNORE FROM BUILD
 
+#if UNITY_EDITOR
 using UnityEngine;
 using System.Collections;
 using UnityEditor;
@@ -48,3 +50,4 @@ public class ConditionCollisionInspector : ConditionInspectorBase
 		}
 	}
 }
+#endif

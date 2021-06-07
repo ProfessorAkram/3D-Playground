@@ -1,12 +1,14 @@
 ﻿/*****
  * Author: Akram Taghavi-Burris
  * Date Created: NA - Copied from Playground 
- * Last Updated: May 31, 2021 - Updates only
+ * Last Updated: June 06, 2021 - Updates & Additons
  * Description: Custom Editor for Condition base editor
  * Project: 3D Playground - a drag and drop framework for 3d game development derived from Unity's own 2D Playground framework.
  ****/
 
+//USE #IF UNITY_EDITOR TO IGNORE FROM BUILD
 
+#if UNITY_EDITOR
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,6 +16,11 @@ using UnityEditor;
 using UnityEditorInternal;
 using System;
 using System.IO;
+
+
+
+
+
 
 [CanEditMultipleObjects]
 public class ConditionInspectorBase : InspectorBase 
@@ -131,3 +138,4 @@ public class ConditionInspectorBase : InspectorBase
 
 
 }
+#endif
