@@ -1,7 +1,7 @@
 ﻿/*****
  * Author: Akram Taghavi-Burris
  * Date Created: June 1, 2021
- * Last Updated: June 1, 2021
+ * Last Updated: June 7, 2021
  * Description: Sets up the fade in and out for the dialogue group
  * Project: 3D Playground - a drag and drop framework for 3d game development derived from Unity's own 2D Playground framework.
  ****/
@@ -20,6 +20,13 @@ public class DialogueAction : Action
 
     //reference to dialogue group
     GameObject goDialogue;
+
+    //Player RidgidBody
+    Rigidbody rbPlayer;
+
+    //Player game object RidgidBody player Previous Constraints
+    RigidbodyConstraints playerPreviousConstraints;
+
 
     //the canvas for the UI Interaction
     GameObject ui_canvas;
@@ -49,6 +56,12 @@ public class DialogueAction : Action
         goDialogue = Instantiate(dialogueUI);
         Debug.Log(goDialogue);
 
+        /* //Stop Player from moving
+         rbPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>(); //get the playe RigidBody
+         playerPreviousConstraints = rbPlayer.constraints; //record the players RB constraints
+         rbPlayer.constraints = RigidbodyConstraints.FreezeAll; //reset the constratints to freeze player
+        */
+
         //set the dialogue
         setDialogue();
         setUiInteraction();
@@ -76,9 +89,11 @@ public class DialogueAction : Action
 
         if (goDialogue && dialogueClosed)
         {
-            Destroy(goDialogue, 5);
+            Destroy(goDialogue, 1);
             if (this.gameObject.GetComponent<ConditionCollision>().destroyOnCollision)
             {
+                //unfreeze constraints
+                rbPlayer.constraints = playerPreviousConstraints; //set the player RB constraints back on
                 Destroy(this.gameObject, 5);
             }
         }

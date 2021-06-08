@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - HUD
+  - Dialogue-UI
   layers:
   - Default
   - TransparentFX

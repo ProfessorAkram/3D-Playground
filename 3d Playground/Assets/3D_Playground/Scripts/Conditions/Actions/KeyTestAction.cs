@@ -29,8 +29,12 @@ public class KeyTestAction : Action
     // Update is called once per frame
     void Update()
     {
-        //get the keyPickedUp value of the required key object
-        keyPickedUp = keyGameObject.GetComponent<KeyPickUpAction>().keyPickedUp;
+        if (keyGameObject)
+        {
+            //get the keyPickedUp value of the required key object
+            keyPickedUp = keyGameObject.GetComponent<KeyPickUpAction>().keyPickedUp;
+        }
+
 
         //If the key is Pickedup 
         if (keyPickedUp)

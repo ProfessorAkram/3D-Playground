@@ -63,7 +63,8 @@ public class ConditionCollision : ConditionBase
 				
 				//if delete on Collison
 				if (destroyOnCollision) { 
-					this.gameObject.GetComponent<MeshRenderer>().enabled=false; 
+					this.gameObject.GetComponent<MeshRenderer>().enabled=false; //hide object until actions all run
+					this.gameObject.GetComponent<Collider>().enabled = false; //disable the object colider
 				}
 
 		}
